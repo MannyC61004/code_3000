@@ -27,7 +27,9 @@ def link_records(anon_df, aux_df):
 
     # filter
     unique_matches = merged.groupby('anon_id').filter(lambda x: len(x) == 1)
-    return unique_matches[['anon_id', 'name']]
+    result = unique_matches[['anon_id', 'name']].rename(columns={'name': 'matched_name'})
+    
+    return result
 def deanonymization_rate(matches_df, anon_df):
     """
     Compute the fraction of anonymized records
